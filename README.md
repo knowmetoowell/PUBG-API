@@ -8,5 +8,6 @@
 우선 PUBG API의 경우 분당 10회의 제한이 있습니다. 이 API의 경우 분당 10회의 제한이 없으며, 제한 없이 무제한적으로 사용할 수 있습니다!
 
 
-### 사용방법
+### 사용방법(How to use)
 * 한국어: [링크](document-KR.md)를 참조하시기 바랍니다.
+* English: Please read to [Link](document-EN.md)

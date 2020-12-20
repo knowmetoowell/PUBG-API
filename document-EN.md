@@ -1,22 +1,22 @@
-# PUBG OPEN API 공식문서
-이곳에서는 PUBG Open-API 사용법에 대해 서술되어 있습니다.
+# PUBG OPEN API official documention
+Within this document, you will find detailed instructions on the various functions the PUBG OPEN API allows for.
 
-#### 유의사항
-* URL: 기본적으로 https://yhs.kr/api/PUBG 으로 시작합니다.
-* 응답형식: 오류를 포함한, 모든 응답은 json(application/json) 형태로 반환됩니다.
-* 날짜: 기본적으로 UTC+9(한국, 서울)로 설정되어있습니다.
+#### WARING
+* URL: All of api is start with https://yhs.kr/api/PUBG by default.
+* Response Type: All responses, including errors, are returned in json(application/json) format.
+* Date and Time: UTC+9 (Korea, Seoul).
 
-매개변수의 경우 params 형태로 GET을 통해 보내주시기 바랍니다.
+For parameters, send via GET in the form of parameters.
 
-#### 플랫폼 정보
-플랫폼 정보의 경우 0~4라는 숫자값을 통해 보낼 수 있습니다.
-* 0: 스팀
-* 1: 카카오
-* 2: XBOX (콘솔)
-* 3:플레이스테이션 (콘솔)
-* 4: 스테디아(클라우드)
+#### Platform info
+For platform information, you can send it with a numeric value of 0-4
+* 0: Steam
+* 1: Kakao
+* 2: XBOX (Console)
+* 3: Playstation (Console)
+* 4: Stadia (Cloud)
 
-## 종류
+## Methods
 **<목차>**
 * [/player](#player)
 * [/normal](#normal)
@@ -26,7 +26,8 @@
 * [/change_platform](#change_platform)
 
 ### /player
-유저의 DB 업데이트 시간과, 플랫폼 정보, 유저 정보를 반환힙니다. 최초 1회 검색시에는 꼭 플랫폼 정보를 작성해야 합니다.
+Returns the user's DB update time, platform information, and user information. 
+You must complete the platform information during first search.
 ```
 https://yhs.kr/api/PUBG/player
 ```
@@ -39,18 +40,18 @@ https://yhs.kr/api/PUBG/player
         <th>nickname</th>
     </tr>
 	<tr>
-		<th>요청하는 정보</th>
-		<td>플랫폼 정보</td>
-		<td>유저명</td>		
+		<th>Require Information</th>
+		<td>Platform Info</td>
+		<td>nickname</td>		
 	</tr>
 	<tr>
-		<th>요청 형태</th>
-		<td>number(숫자)</td>		
-		<td>string(문자)</td>
+		<th>Type</th>
+		<td>number</td>		
+		<td>string</td>
 	</tr>
 </table>
 
-#### 반환 값
+#### Return Value
 ```json
 {
     "id": "user id",
@@ -88,25 +89,25 @@ https://yhs.kr/api/PUBG/player
     }
 }
 ```
-##### 기본
-* id: 유저의 ID [문자]
-* nickname: 유저의 닉네임 [문자]
-* platform: 해당 유저의 플랫폼 정보 [숫자]
-* last_update: 유저 DB 업데이트 정보 [json]
+##### Basics
+* id: User's ID [String]
+* nickname: User's nickname [String]
+* platform: Platform Info [number]
+* last_update: User's DB update time [json]
 
-##### 유저 업데이트 정보
-* weapon: 미사용
-* normal: 일반전 DB 업데이트 정보 [json]
-* ranked: 경쟁전 DB 업데이트 정보 [json]
-* matches: 미사용
+##### User's Last_update
+* weapon: Unused
+* normal: Last Update time of normal status [json]
+* ranked: Last Update time of ranked status [json]
+* matches: Unused
 
 ### /normal
-검색하는 유저에 일반 전적을 불러옵니다.
+Returns a player's data, such as normal game stats.
 ```
 https://yhs.kr/api/PUBG/normal
 ```
 
-#### 매개변수
+#### Parameters
 <table>
     <tr>
         <th>/</th>
@@ -114,21 +115,21 @@ https://yhs.kr/api/PUBG/normal
         <th>season</th>
     </tr>
 	<tr>
-		<th>요청하는 정보</th>
-		<td>유저의 ID</td>
-		<td>시즌(옵션)</td>		
+		<th>Require Information</th>
+		<td>User's ID</td>
+		<td>Season</td>	
 	</tr>
 	<tr>
-		<th>요청 형태</th>
-		<td>string(문자)</td>		
-		<td>string(문자)</td>
+		<th>Type</th>
+		<td>string</td>		
+		<td>number</td>
 	</tr>
 </table>
 
-#### 반환 값
+#### Return Value
 ```json
 {
-    "id": "유저의 ID",
+    "id": "User's ID",
     "gameMode": {
         "solo": {
             "assists": 0,
@@ -355,54 +356,54 @@ https://yhs.kr/api/PUBG/normal
     }
 }
 ```
-##### 기본
-* id: 유저의 ID(문자)
-* gamemode: 게임모드 별 전적을 반환합니다. [solo, solo-fpp, duo, duo-fpp, squad, squad-fpp] (json)
+##### Basics
+* id: User's ID [string]
+* gamemode: Game Stats of User's Gamemode (solo, solo-fpp, duo, duo-fpp, squad, squad-fpp) [json]
 
-##### 게임모드 별 정보(gamemode)
-* assists: 어시스트 [숫자]
-* boosts: 도핑 아이템 사용횟수 [숫자]
-* dBNOs: dBNO(Down But Not Out, 기절하였지만 아웃으로 처리되지 않은 것)횟수 [숫자]
-* dailyKills: 일당 킬 횟수 [숫자]
-* dailyWins: 일당 우승 횟수 [숫자]
-* damageDealt: 평균 피해량 [숫자]
-* days: 플레이시간(일)만 반환합니다. [숫자]
-* headshotKills: 헤드샷 횟수 [숫자]
-* heals: 힐 아이템(구급상자, 붕대, 의료용 키트)사용 횟수 [숫자]
-* KDA_point: 킬/데스/어시스트 점수 [소수]
-* KD_point": 킬/데스 점수 [소수]
-* kills: 킬 횟수 [숫자]
-* longestKill: 최대 저격 거리 [소수]
-* longestTimeSurvived: 생존시간(초) [소수]
-* longestTimeSurvivedAnswer: 생존시간 [문자]
-* losses: 패배(사망) 횟수 [숫자]
-* maxKillStreaks: 여포 횟수 [숫자]
-* mostSurvivalTime: 평균 생존 시간(초) [소수]
-* revives: 소생 횟수 [숫자]
-* rideDistance: 자동차, 오토바이등을 이용한 이동 거리 [소수]
-* roadKills: 로드킬(고라니) 횟수 [숫자]
-* roundMostKills: 라운드별 평균 킬 [숫자]
-* roundsPlayed: 플레이 횟수 [숫자]
-* suicides: 자살 횟수 [숫자]
-* swimDistance: 수영을 이용한 이동 거리 [소수]
-* teamKills: 팀킬 횟수 [숫자]
-* timeSurvived: 생존 시간(초) [소수]
-* timeSurvivedAnswer: 생존 시간 [문자]
-* top10s: top10 횟수 [숫자]
-* vehicleDestroys: 차량 파괴 횟수 [숫자]
-* walkDistance: 걸어서 이동한 거리 [소수]
-* weaponsAcquired: 무기 획득한 횟수 [숫자]
-* weeklyKills: 주당 킬 횟수 [숫자]
-* weeklyWins: 주당 우승 횟수 [숫자]
-* wins: 우승 [숫자]
+##### Information by Game Mode
+* assists: Assists [number]
+* boosts: Used Boosts [number]
+* dBNOs: dBNO(Down But Not Out) count [number]
+* dailyKills: Daily Kills count [number]
+* dailyWins: Daily Wins count [number]
+* damageDealt: damage Dealt [number]
+* days: play time (days) [number]
+* headshotKills: Headshot Kills count [number]
+* heals: Used Heal [number]
+* KDA_point: Kill/Deaths/Assists Point [Float]
+* KD_point": Kill/Deaths Point [Float]
+* kills: Kills count [number]
+* longestKill: longest Kill distance [Float]
+* longestTimeSurvived: longest Time Survived(Second) [Float]
+* longestTimeSurvivedAnswer: longest Time Survived Korean Information [String]
+* losses: Losses(Deaths) Count [number]
+* maxKillStreaks: Max Kill Streaks [number]
+* mostSurvivalTime: Most Survival Time [Float]
+* revives: Revives Count [number]
+* rideDistance: Distance traveled with car or motorcycle [Float]
+* roadKills: kills with car or motorcycle [number]
+* roundMostKills: Round Most Kills [number]
+* roundsPlayed: Rounds Played [number]
+* suicides: Suicides Count [number]
+* swimDistance: Distance traveled with swimming [Float]
+* teamKills: Team Kills Count [number]
+* timeSurvived: Survived time(Second) [Float]
+* timeSurvivedAnswer: Survived time Korean Information [String]
+* top10s: number of top10 [number]
+* vehicleDestroys: vehicle Destroys count [number]
+* walkDistance: Distance traveled with walking [Float]
+* weaponsAcquired: Number of weapon acquisition [number]
+* weeklyKills: Weekly Kills count [number]
+* weeklyWins: Weekly Wins count [number]
+* wins: Wins count [number]
 
 ### /ranked
-검색하는 유저에 경쟁 전적을 불러옵니다.
+Returns a player's data, such as ranked game stats.
 ```
 https://yhs.kr/api/PUBG/ranked
 ```
 
-#### 매개변수
+#### Parameters
 <table>
     <tr>
         <th>/</th>
@@ -410,21 +411,21 @@ https://yhs.kr/api/PUBG/ranked
         <th>season</th>
     </tr>
 	<tr>
-		<th>요청하는 정보</th>
-		<td>유저의 ID</td>
-		<td>시즌(옵션)</td>		
+		<th>Require Information</th>
+		<td>User's ID</td>
+		<td>Season</td>	
 	</tr>
 	<tr>
-		<th>요청 형태</th>
-		<td>string(문자)</td>		
-		<td>string(문자)</td>
+		<th>Type</th>
+		<td>string</td>		
+		<td>number</td>
 	</tr>
 </table>
 
-#### 반환 값
+#### Return Value
 ```json
 {
-    "id": "유저의 ID",
+    "id": "User's ID",
     "gameMode": {
         "solo": {
             "assists": 0,
@@ -537,39 +538,38 @@ https://yhs.kr/api/PUBG/ranked
     }
 }
 ```
-##### 기본
-* id: 유저의 ID(문자)
-* gamemode: 게임모드 별 전적을 반환합니다. [solo, solo-fpp, squad, squad-fpp] (json)
+##### Basics
+* id: User's ID [string]
+* gamemode: Game Stats of User's Gamemode (solo, solo-fpp, duo, duo-fpp, squad, squad-fpp) [json]
 
-##### 게임모드 별 정보(gamemode)
-* assists: 어시스트 [숫자]
-* avgRank: 평균 순위 [숫자]
-* bestRank 최대 랭크 [json]
-* bestRankAnswer: 최대 랭크(한 문자로 통합시켰습니다.) [문자]
-* bestRankPoint: 최대 랭크 점수 [숫자]
-* currentRank 현재 랭크 [json]
-* currentRankAnswer: 현재 랭크(한 문자로 통합시켰습니다.) [문자]
-* currentRankPoint: 현재 랭크 점수 [숫자]
-* dBNOs: dBNO(Down But Not Out, 기절하였지만 아웃으로 처리되지 않은 것)횟수 [숫자]
-* damageDealt: 평균 피해량 [숫자]
-* deaths: 패배(사망) 횟수 [숫자]
-* KDA_point: 킬/데스/어시스트 점수 [소수]
-* KD_point": 킬/데스 점수 [소수]
-* kills: 킬 횟수 [숫자]
-* roundsPlayed: 플레이 횟수 [숫자]
-* top10s: 탑률 [숫자]
-* top10s_point: top10 점수 [소수]
-* wins: 우승 횟수 [숫자]
-* wins_point: 승률 [소수]
+##### Information by Game Mode
+* assists: Assists [number]
+* dBNOs: dBNO(Down But Not Out) count [number]
+* bestRank Best Rank [json]
+* bestRankAnswer: Best Rank(Integrate into characters) [문자]
+* bestRankPoint: Best Rank point [숫자]
+* currentRank Current Rank [json]
+* currentRankAnswer: Current Rank(Integrate into characters) [문자]
+* currentRankPoint: Current Rank [숫자]
+* damageDealt: damage Dealt [number]
+* deaths: Losses(Deaths) Count [number]
+* KDA_point: Kill/Deaths/Assists Point [Float]
+* KD_point": Kill/Deaths Point [Float]
+* kills: Kills count [number]
+* roundsPlayed: Rounds Played [number]
+* top10s: number of top10 [number]
+* top10s_point: point of top10 [Float]
+* wins: Wins count [number]
+* wins_point: point of wins [Float]
 
 
 ### /normal/update
-검색하는 유저에 일반 전적을 업데이트 합니다.
+update the game stats normal mode
 ```
 https://yhs.kr/api/PUBG/ranked/update
 ```
 
-#### 매개변수
+#### Parameters
 <table>
     <tr>
         <th>/</th>
@@ -577,24 +577,24 @@ https://yhs.kr/api/PUBG/ranked/update
         <th>season</th>
     </tr>
 	<tr>
-		<th>요청하는 정보</th>
-		<td>유저의 ID</td>
-		<td>시즌(옵션)</td>		
+		<th>Require Information</th>
+		<td>User's ID</td>
+		<td>Season</td>	
 	</tr>
 	<tr>
-		<th>요청 형태</th>
-		<td>string(문자)</td>		
-		<td>string(문자)</td>
+		<th>Type</th>
+		<td>string</td>		
+		<td>number</td>
 	</tr>
 </table>
 
 ### /ranked/update
-검색하는 유저에 경쟁 전적을 업데이트 합니다.
+update the game stats ranked mode
 ```
 https://yhs.kr/api/PUBG/ranked/update
 ```
 
-#### 매개변수
+#### Parameters
 <table>
     <tr>
         <th>/</th>
@@ -602,24 +602,24 @@ https://yhs.kr/api/PUBG/ranked/update
         <th>season</th>
     </tr>
 	<tr>
-		<th>요청하는 정보</th>
-		<td>유저의 ID</td>
-		<td>시즌(옵션)</td>		
+		<th>Require Information</th>
+		<td>User's ID</td>
+		<td>Season</td>	
 	</tr>
 	<tr>
-		<th>요청 형태</th>
-		<td>string(문자)</td>		
-		<td>string(문자)</td>
+		<th>Type</th>
+		<td>string</td>		
+		<td>number</td>
 	</tr>
 </table>
 
 ### /change_platform
-만약 유저 플랫폼 정보를 잘못 등록했을 경우 위 기능을 통하여 변경하실 수 있습니다.
+If you misregister user platform information, you can change this function.
 ```
 https://yhs.kr/api/PUBG/change_platform
 ```
 
-#### 매개변수
+#### Parameters
 <table>
     <tr>
         <th>/</th>
@@ -627,20 +627,20 @@ https://yhs.kr/api/PUBG/change_platform
         <th>nickname</th>
     </tr>
 	<tr>
-		<th>요청하는 정보</th>
-		<td>플랫폼 정보</td>
-		<td>유저명</td>		
+		<th>Require Information</th>
+		<td>Platform Info</td>
+		<td>nickname</td>		
 	</tr>
 	<tr>
-		<th>요청 형태</th>
-		<td>number(숫자)</td>		
-		<td>string(문자)</td>
+		<th>Type</th>
+		<td>number</td>		
+		<td>string</td>
 	</tr>
 </table>
 
-## 오류 반환 정보
-오류의 정보는 status code와 오류내 반환값을 통해 를 통해 확인하실 수 있습니다.
-반환해야하는 정보가 굳이 없는 경우 아래의 값이 반환됩니다.
+## Expection
+Information about the error can be found through the status code and the return value within the error.
+If no information is required to be returned, the following values are returned.
 ```json
 {
     "code": "00",
@@ -648,14 +648,14 @@ https://yhs.kr/api/PUBG/change_platform
 }
 ```
 
-* 200(00): 성공적으로 반환됨.
-* 400(01,02): 누락된 정보(msg 확인 요망)
-* 400(05): /PUBG/player를 통해 유저를 DB에 우선적으로 등록해주기 바람.
-* 400(06): platform 매개변수의 값이 형태가 잘못됨.
-* 400(07): platform 매개변수의 값이 잘못됨. (0-4)의 정보만 받을수 있음.
-* 400(08): 시즌 정보는 오직 숫자를 통해 받을 수 있음.
-* 401(03): DB로 부터 불러오는 것을 실패함. 
-* 404(04): 정보를 찾을 수 없음
-* 431(31): 콘텐츠 규격이 잘못됨.
-* 432(32): 너무 많은 요청이 들어옴.
-* 433(33): 알 수없는 오류가 발생함.
+* 200(00): Successfully called.
+* 400(01,02): Please write something(check msg)
+* 400(05): No information about the user was found. Please proceed with "/PUBG/player" first.
+* 400(06): Platform values can only contain numbers.
+* 400(07): Platform values can contain only 0-4 values.
+* 400(08): Season values can only contain numbers.
+* 401(03): Failed to get DB.
+* 404(04): Unable to find the information.
+* 431(31): Invalid content specification.
+* 432(32): Too many requests have been received.
+* 433(33): An unknown error has occurred.
