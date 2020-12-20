@@ -16,6 +16,15 @@
 * 3:플레이스테이션 (콘솔)
 * 4: 스테디아(클라우드)
 
+## 종류
+**<목차>**
+* [/player](#player)
+* [/normal](#normal)
+* [/ranked](#ranked)
+* [/normal](#normalupdate)
+* [/ranked/update](#rankedupdate)
+* [/change_platform](#change_platform)
+
 ### /player
 유저의 DB 업데이트 시간과, 플랫폼 정보, 유저 정보를 반환힙니다. 최초 1회 검색시에는 꼭 플랫폼 정보를 작성해야 합니다.
 ```
