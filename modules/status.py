@@ -66,7 +66,7 @@ async def season_status(player_id,platform,season):
                 if resp.status == 200:
                     return_value = await resp.json()
                 else:
-                    e_resp = response_num(resp)
+                    e_resp = response_num(resp.status)
                     return False, e_resp
         sql = pymysql.escape_string("insert into NORMAL_STATUS(id,html,season) VALUES(%s, %s, %s)")
         insert_data = json.dumps(return_value)
@@ -86,7 +86,7 @@ async def season_status_update(player_id,platform,season):
             if resp.status == 200:
                 return_value = await resp.json()
             else:
-                e_resp = response_num(resp)
+                e_resp = response_num(resp.status)
                 return False, e_resp
     sql = pymysql.escape_string("UPDATE NORMAL_STATUS SET html=%s WHERE id=%s and season=%s")
     cur.execute(sql, (json.dumps(return_value), player_id, season))
@@ -118,7 +118,7 @@ async def ranked_status(player_id,platform,season):
                 if resp.status == 200:
                     return_value = await resp.json()
                 else:
-                    e_resp = response_num(resp)
+                    e_resp = response_num(resp.status)
                     return False, e_resp
         sql = pymysql.escape_string("insert into RANKED_STATUS(id,html,season) VALUES(%s, %s, %s)")
         insert_data = json.dumps(return_value)
@@ -138,7 +138,7 @@ async def ranked_status_update(player_id,platform,season):
             if resp.status == 200:
                 return_value = await resp.json()
             else:
-                e_resp = response_num(resp)
+                e_resp = response_num(resp.status)
                 return False, e_resp
     sql = pymysql.escape_string("UPDATE RANKED_STATUS SET html=%s WHERE id=%s and season=%s")
     cur.execute(sql, (json.dumps(return_value), player_id, season))

@@ -48,15 +48,6 @@ sample_f = open(f"{directory}/data/last_update_sample.json",mode='r')
 sample1 = json.loads(sample_f.read())
 sample_f.close()
 
-def response_num(response):
-    if response == 200: return [200,'00',"Successfully called."]
-    elif response == 400: return [400,'01',"Please write your nickname."]
-    elif response == 401: return [401,'03',"Failed to get DB. Please try again later."]
-    elif response == 404: return [404,'04',"Unable to find the user."]
-    elif response == 415: return [431,'31',"Invalid content specification. Please contact API manufacturer."]
-    elif response == 429: return [432,'32',"Too many requests have been received. Please try again later."]
-    else: return [433,'33',"An unknown error has occurred. Please contact the manager."]
-
 async def get_season(pubg_platform):
     connect = pymysql.connect(host=db_ip, user=db_user, password=db_pw, db='PUBG_BOT', charset='utf8')
     cur = connect.cursor()
@@ -108,13 +99,14 @@ async def player(request):
         else:
             try: platform = int(args['platform'][0])
             except ValueError: return response.json({'code':'06', 'msg':"Platform values can only contain numbers."}, status=400)
-            if not (platform > 0 and platform < 6): return response.json({'code':'07', 'msg':"Platform values can contain only 0-4 values."}, status=400)
+            if not (platform >= 0 and platform < 5): return response.json({'code':'07', 'msg':"Platform values can contain only 0-4 values."}, status=400)
         async with aiohttp.ClientSession() as session:
             async with session.get(f"https://api.pubg.com/shards/{platform_site[platform]}/players?filter[playerNames]={nickname}", headers=header) as resp:
                 if resp.status == 200:
                     json_data = await resp.json()
                 else:
-                    e_resp = s_info.response_num(resp)
+                    e_resp = s_info.response_num(resp.status)
+                    print(await resp.json(),resp.status)
                     return response.json({'code': e_resp[1], 'msg': e_resp[2]}, status=e_resp[0])
         data = {
             "id":json_data["data"][0]["id"],
