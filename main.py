@@ -81,7 +81,7 @@ def time_num(f_playtime):
         return f"{playtime.day-1}일 {playtime.hour}시간 {playtime.minute}분 {playtime.second}초"
     return f"{playtime.month-1}달 {playtime.day-1}일 {playtime.hour}시간 {playtime.minute}분 {playtime.second}초"
 
-@app.route("/PUBG/player")
+@app.route("/api/PUBG/player")
 async def player(request):
     args = request.get_args(keep_blank_values=True)
     if not ("nickname" in args): return response.json({'code':'01', 'msg':"Please write your nickname."}, status=400)
@@ -128,7 +128,7 @@ async def player(request):
         connect.close()
         return response.json(data,status=200)
 
-@app.route("/PUBG/normal")
+@app.route("/api/PUBG/normal")
 async def normal_status(request):
     args = request.get_args(keep_blank_values=True)
     if not ("id" in args): return response.json({'code':'01', 'msg':"Please write your id."}, status=400)
@@ -209,7 +209,7 @@ async def normal_status(request):
             data['gameMode'].update(i_data)
         return response.json(data, status=200)
 
-@app.route("/PUBG/normal/update")
+@app.route("/api/PUBG/normal/update")
 async def update_normal_status(request):
     args = request.get_args(keep_blank_values=True)
     if not ("id" in args): return response.json({'code':'01', 'msg':"Please write your id."}, status=400)
@@ -238,7 +238,7 @@ async def update_normal_status(request):
         "msg":"Updated successfully."
     },status=200)
 
-@app.route("/PUBG/ranked")
+@app.route("/api/PUBG/ranked")
 async def ranked_status(request):
     args = request.get_args(keep_blank_values=True)
     if not ("id" in args): return response.json({'code':'01', 'msg':"Please write your id."}, status=400)
@@ -341,7 +341,7 @@ async def ranked_status(request):
             data['gameMode'].update(i_data)
         return response.json(data, status=200)
 
-@app.route("/PUBG/ranked/update")
+@app.route("/api/PUBG/ranked/update")
 async def update_ranked_status(request):
     args = request.get_args(keep_blank_values=True)
     if not ("id" in args): return response.json({'code':'01', 'msg':"Please write your id."}, status=400)
@@ -371,7 +371,7 @@ async def update_ranked_status(request):
     },status=200)
 
 
-@app.route("/PUBG/player/change_platform")
+@app.route("/api/PUBG/player/change_platform")
 async def change_platform(request):
     args = request.get_args(keep_blank_values=True)
     if not ("nickname" in args): return response.json({'code':'01', 'msg':"Please write your nickname."}, status=400)
@@ -399,4 +399,4 @@ async def change_platform(request):
         connect.close()
         return response.json({'code': '05','msg': "No information about the user was found. Please proceed with \"/PUBG/player\" first."},status=400)
 
-app.run('0.0.0.0', 3200)
+app.run('127.0.0.1', 3200)
