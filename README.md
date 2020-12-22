@@ -1,4 +1,4 @@
-#PUBG Open-API
+# PUBG Open-API
 ![python_version](https://img.shields.io/badge/python-3.8-3776AB?style=flat&logo=python&logoColor=ffffff)
 ![develop-team](https://img.shields.io/badge/Developed%20By-Team%20Developer%20Space-0080ff?style=flat)
 ![planning_by](https://img.shields.io/badge/Planning%20By-건유1019-0080ff?style=flat) <br/>
