@@ -17,7 +17,8 @@ For platform information, you can send it with a numeric value of 0-4
 * 4: Stadia (Cloud)
 
 ## Methods
-**<List of Methods>**
+
+**< List of Methods >**
 * [/player](#player)
 * [/normal](#normal)
 * [/ranked](#ranked)
