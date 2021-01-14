@@ -378,7 +378,7 @@ async def change_platform(request):
         else:
             try: platform = int(args['platform'][0])
             except ValueError: return response.json({'code':'06', 'msg':"Platform values can only contain numbers."}, status=400)
-            if not (platform > 0 and platform < 6): return response.json({'code':'07', 'msg':"Platform values can contain only 0-4 values."}, status=400)
+            if not (platform >= 0 and platform < 5): return response.json({'code':'07', 'msg':"Platform values can contain only 0-4 values."}, status=400)
         command = pymysql.escape_string("UPDATE player SET platform=%s WHERE name=%s")
         cur.execute(command,(platform,nickname))
         connect.commit()
