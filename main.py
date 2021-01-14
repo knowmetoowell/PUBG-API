@@ -12,7 +12,9 @@ from sanic import Sanic
 from pytz import timezone
 import sanic.response as response
 
-app = Sanic(__name__)
+from log_config import LOGGING_CONFIG
+
+app = Sanic(__name__, log_config=LOGGING_CONFIG)
 platform_name = ["Steam","Kakao","XBOX","PS","Stadia"]
 platform_site = ["steam","kakao","xbox","psn","stadia"]
 DB_platform = ["Steam","Kakao","XBOX","PSN","Stadia"]
@@ -71,6 +73,10 @@ def time_num(f_playtime):
             return f"{playtime.hour}시간 {playtime.minute}분 {playtime.second}초"
         return f"{playtime.day-1}일 {playtime.hour}시간 {playtime.minute}분 {playtime.second}초"
     return f"{playtime.month-1}달 {playtime.day-1}일 {playtime.hour}시간 {playtime.minute}분 {playtime.second}초"
+
+@app.route("/api/PUBG/")
+async def main(request):
+    return response.redirect("https://github.com/team-alpha-kr/PUBG-API")
 
 @app.route("/api/PUBG/player")
 async def player(request):
