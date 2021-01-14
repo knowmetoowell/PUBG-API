@@ -26,7 +26,7 @@
 * [/change_platform](#change_platform)
 
 ### /player
-유저의 DB 업데이트 시간과, 플랫폼 정보, 유저 정보를 반환힙니다. 최초 1회 검색시에는 꼭 플랫폼 정보를 작성해야 합니다.
+유저의 DB 업데이트 시간과, 플랫폼 정보, 유저 정보를 반환합니다. 최초 1회 검색시에는 꼭 플랫폼 정보를 작성해야 합니다.
 ```
 https://yhs.kr/api/PUBG/player
 ```
@@ -613,10 +613,10 @@ https://yhs.kr/api/PUBG/ranked/update
 	</tr>
 </table>
 
-### /change_platform
+### /player/change_platform
 만약 유저 플랫폼 정보를 잘못 등록했을 경우 위 기능을 통하여 변경하실 수 있습니다.
 ```
-https://yhs.kr/api/PUBG/change_platform
+https://yhs.kr/api/PUBG/player/change_platform
 ```
 
 #### 매개변수

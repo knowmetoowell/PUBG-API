@@ -17,7 +17,8 @@ For platform information, you can send it with a numeric value of 0-4
 * 4: Stadia (Cloud)
 
 ## Methods
-**<목차>**
+
+**< List of Methods >**
 * [/player](#player)
 * [/normal](#normal)
 * [/ranked](#ranked)
@@ -613,10 +614,10 @@ https://yhs.kr/api/PUBG/ranked/update
 	</tr>
 </table>
 
-### /change_platform
+### /player/change_platform
 If you misregister user platform information, you can change this function.
 ```
-https://yhs.kr/api/PUBG/change_platform
+https://yhs.kr/api/PUBG/player/change_platform
 ```
 
 #### Parameters
