@@ -566,7 +566,7 @@ https://yhs.kr/api/PUBG/ranked
 ### /normal/update
 검색하는 유저에 일반 전적을 업데이트 합니다.
 ```
-https://yhs.kr/api/PUBG/ranked/update
+https://yhs.kr/api/PUBG/normal/update
 ```
 
 #### 매개변수

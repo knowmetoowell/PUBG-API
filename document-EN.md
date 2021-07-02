@@ -567,7 +567,7 @@ https://yhs.kr/api/PUBG/ranked
 ### /normal/update
 update the game stats normal mode
 ```
-https://yhs.kr/api/PUBG/ranked/update
+https://yhs.kr/api/PUBG/normal/update
 ```
 
 #### Parameters
