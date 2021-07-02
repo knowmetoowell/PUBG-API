@@ -230,7 +230,7 @@ async def update_normal_status(request):
         if len(str(season)) < 2: season = f"division.bro.official.{type_season}-0{season}"
         else: season = f"division.bro.official.{type_season}-{season}"
     else: season = await get_season(platform_info)
-    await s_info.normal_status_update(pubg_id, platform_info, season)
+    await s_info.season_status_update(pubg_id, platform_info, season)
     return response.json({
         "code":"00",
         "msg":"Updated successfully."
